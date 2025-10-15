@@ -1,0 +1,15 @@
+let title 
+
+
+
+
+
+
+
+const createmovies = (req, res) => {
+    let (title,year) = req.body
+
+    let querytext ="INSERT INTO Movies (title, year, created_at, update_at VALUES $(title), $(year), non(),
+
+    connectionPool.query(querytext, req, )
+}

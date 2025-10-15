@@ -1,0 +1,50 @@
+const { connectionPool } = require("../config/db");
+
+// CREATE
+const createMahasiswa = (req, res) => {
+  var { nama, mata_kuliah, nilai } = req.body;
+  console.log(nama);
+  console.log(mata_kuliah);
+  console.log(nilai);
+
+  let queryText = `INSERT INTO nilai_mahasiswa(nama, mata_kuliah, nilai, indeks_nilai, created_at,updated_at) VALUES ("${nama}", "${mata_kuliah}", ${nilai}, "${hitungIndeks(
+    nilai
+  )}", now(), now())`;
+
+  connectionPool.query(queryText, (err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+  });
+  res.json({ message: "Index nilai telah dibuat", status: "success" });
+};
+
+// READ BY ID
+const readMahasiswaId = (req, res) => {
+  let { id } = req.params;
+  let queryText = `SELECT * FROM nilai_mahasiswa WHERE id = ${id}`;
+  connectionPool.query(queryText, (err, data) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    let mahasiswa = data[0];
+    res.json(mahasiswa);
+  });
+};
+// Fungsi untuk hitung indeks
+function hitungIndeks(nilai) {
+  if (nilai >= 80) return "A";
+  if (nilai >= 70) return "B";
+  if (nilai >= 60) return "C";
+  if (nilai >= 50) return "D";
+  return "E";
+}
+
+if (nilai > 100 || nilai < 0) {
+  return res.send("Tidak Ada");
+
+}
+
+module.exports = { createMahasiswa, readMahasiswaId };

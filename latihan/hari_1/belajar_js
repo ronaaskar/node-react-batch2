@@ -1,0 +1,3 @@
+var Word = Javascripts
+
+console.log(Word.lenght)

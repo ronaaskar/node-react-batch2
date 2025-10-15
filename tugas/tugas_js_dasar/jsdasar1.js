@@ -7,7 +7,7 @@ var kata5 = "seorang ";
 var kata6 = "software ";
 var kata7 = "engineer ";
 
-console.log(kata1 + kata2 + kata3 + kata4 + kata5 + kata6 + kata7);
+console.log(kata1 + nama+ kata2 + kata3 + kata4 + kata5 + kata6 + kata7);
 
 
 
