@@ -1,0 +1,1 @@
+SELECT * FROM nilai_mahasiswa;

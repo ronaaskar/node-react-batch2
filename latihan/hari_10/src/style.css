@@ -1,0 +1,32 @@
+p {
+  color: blue;
+}
+
+h1 {
+  color: aqua;
+}
+
+.satu {
+  width: 200px;
+  length: 300px;
+  background-color: blue;
+  border: solid;
+  border-color: black;
+  display: block;
+  
+}
+
+h1 {
+    font-size: 100px;
+}
+
+
+.divisi {
+    border-color: aquamarine;
+    border-style :3px;
+    background-color: blueviolet;
+    height: 200px;
+    font-weight:150px;
+
+
+}

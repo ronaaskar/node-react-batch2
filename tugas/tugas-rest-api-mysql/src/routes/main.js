@@ -1,7 +1,12 @@
 const express = require("express");
-const {createMahasiswa, readMahasiswaId} = require ("../controller/mahasiswacontroller");
+const {createMahasiswa, getAllMahasiswa, getMahasiswaById, updateMahasiswa, deleteMahasiswa } = require ("../controller/mahasiswacontroller");
+
 
 const router = express.Router()
 router.post('/mahasiswa', createMahasiswa)
-router.get('/mahasiswa/:id', readMahasiswaId)
+router.get('/mahasiswa', getAllMahasiswa)
+router.get('/mahasiswa/:id', getMahasiswaById)
+router.put('/mahasiswa/:id', updateMahasiswa)
+router.delete('/mahasiswa/:id', deleteMahasiswa)
 module.exports = router;
+

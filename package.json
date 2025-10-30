@@ -1,0 +1,30 @@
+{
+  "name": "react-batch2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ronaaskar/node-react-batch2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ronaaskar/node-react-batch2/issues"
+  },
+  "homepage": "https://github.com/ronaaskar/node-react-batch2#readme",
+  "dependencies": {
+    "@prisma/client": "^6.18.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "reactjs": "^1.0.0",
+    "swagger": "^0.0.1",
+    "vite": "^7.1.12"
+  },
+  "devDependencies": {
+    "prisma": "^6.18.0"
+  }
+}

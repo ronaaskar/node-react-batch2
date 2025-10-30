@@ -1,0 +1,64 @@
+1. Tampilkan seluruh data posts yang ditulis oleh John Doe
+
+SELECT * 
+FROM blog_posts bp
+JOIN users u ON bp.author_id = u.id
+WHERE u.name = 'John Doe';
+
+
+
+
+
+2. Tampilkan category name, post title, author name yang memiliki category Basic saja
+
+SELECT c.name AS category_name, bp.title AS post_title, u.name AS author_name
+FROM blog_posts bp
+JOIN users u ON bp.author_id = u.id
+JOIN post_categories pc ON bp.id = pc.post_id
+JOIN categories c ON pc.category_id = c.id
+WHERE c.name = 'Basic';
+
+
+
+
+
+3. Tampilkan category name, post title, dan body yang ditulis oleh Robert dan Frank
+
+SELECT c.name AS category_name, bp.title, bp.body
+FROM blog_posts bp
+JOIN users u ON bp.author_id = u.id
+JOIN post_categories pc ON bp.id = pc.post_id
+JOIN categories c ON pc.category_id = c.id
+WHERE u.name IN ('Robert', 'Frank');
+
+
+
+
+4. Tampilkan nama penulis dan nama category untuk artikel yang memiliki >= 2 category
+
+SELECT u.name AS author_name, c.name AS category_name
+FROM blog_posts bp
+JOIN users u ON bp.author_id = u.id
+JOIN post_categories pc ON bp.id = pc.post_id
+JOIN categories c ON pc.category_id = c.id
+WHERE bp.id IN (
+  SELECT post_id
+  FROM post_categories
+  GROUP BY post_id
+  HAVING COUNT(category_id) >= 2
+);
+
+
+
+
+5. Tampilkan nama penulis dan post title untuk artikel yang memiliki hanya 1 category
+
+SELECT u.name AS author_name, bp.title AS post_title
+FROM blog_posts bp
+JOIN users u ON bp.author_id = u.id
+WHERE bp.id IN (
+  SELECT post_id
+  FROM post_categories
+  GROUP BY post_id
+  HAVING COUNT(category_id) = 1
+);

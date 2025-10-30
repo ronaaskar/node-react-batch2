@@ -1,0 +1,79 @@
+//No.1 (tugas MongosDB)
+
+db.users.find({}, { password: 0 })
+db.users.find({}, { password: 0 })
+db.items.find().pretty()
+
+
+
+//No.2 (tugas MongosDB)
+
+{
+  _id: ObjectId('690030973a706bb168b231d2'),
+  name: 'Sumsang b50',
+  description: 'hape keren dari merek sumsang',
+  price: 4000000,
+  stock: 100
+}
+
+{
+  _id: ObjectId('690030973a706bb168b231d3'),
+  name: 'Uniklooh',
+  description: 'baju keren dari brand ternama',
+  price: 500000,
+  stock: 50
+}
+
+{
+  _id: ObjectId('690030973a706bb168b231d4'),
+  name: 'IMHO Watch',
+  description: 'jam tangan anak yang jujur banget',
+  price: 2000000,
+  stock: 10
+}
+
+
+
+
+//No.3A (tugas MongosDB)
+db.items.find({ price: { $gt: 1000000 } })
+
+{
+  _id: ObjectId('690030973a706bb168b231d2'),
+  name: 'Sumsang b50',
+  description: 'hape keren dari merek sumsang',
+  price: 4000000,
+  stock: 100
+}
+
+{
+  _id: ObjectId('690030973a706bb168b231d4'),
+  name: 'IMHO Watch',
+  description: 'jam tangan anak yang jujur banget',
+  price: 2000000,
+  stock: 10
+}
+
+
+
+
+//No.3B (tugas MongosDB)
+db.items.find({ name: { $regex: /uniklo/i } })
+
+{
+  _id: ObjectId('690030973a706bb168b231d3'),
+  name: 'Uniklooh',
+  description: 'baju keren dari brand ternama',
+  price: 500000,
+  stock: 50
+}
+
+
+//No.4 (tugas MongoDB)
+
+db.items.updateOne(
+  { name: "Sumsang b50" },
+  { $set: { price: 2500000 } }
+)
+
+

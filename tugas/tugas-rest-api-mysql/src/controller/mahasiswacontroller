@@ -20,31 +20,83 @@ const createMahasiswa = (req, res) => {
   res.json({ message: "Index nilai telah dibuat", status: "success" });
 };
 
-// READ BY ID
-const readMahasiswaId = (req, res) => {
-  let { id } = req.params;
-  let queryText = `SELECT * FROM nilai_mahasiswa WHERE id = ${id}`;
+const hitungIndeks = (nilai) => {
+  if (nilai >= 80) return 'A';
+  if (nilai >= 70) return 'B';
+  if (nilai >= 60) return 'C';
+  if (nilai >= 50) return 'D';
+  return 'E';
+};
+
+
+const getAllMahasiswa = (req, res) => {
+  let queryText = `SELECT * FROM nilai_mahasiswa`;
   connectionPool.query(queryText, (err, data) => {
     if (err) {
-      console.error(err);
-      return;
+      console.log(err);
+      return res.status(500).json({ message: err.message });
     }
-    let mahasiswa = data[0];
-    res.json(mahasiswa);
+    res.json(data);
   });
 };
-// Fungsi untuk hitung indeks
-function hitungIndeks(nilai) {
-  if (nilai >= 80) return "A";
-  if (nilai >= 70) return "B";
-  if (nilai >= 60) return "C";
-  if (nilai >= 50) return "D";
-  return "E";
-}
 
-if (nilai > 100 || nilai < 0) {
-  return res.send("Tidak Ada");
 
-}
+const getMahasiswaById = (req, res) => {
+  const { id } = req.params;
+  let queryText = `SELECT * FROM nilai_mahasiswa WHERE id=${id}`;
+  connectionPool.query(queryText, (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: err.message });
+    }
+    if (data.length === 0) return res.status(404).json({ message: 'Data tidak ditemukan' });
+    res.json(data[0]);
+  });
+};
 
-module.exports = { createMahasiswa, readMahasiswaId };
+
+
+const updateMahasiswa = (req, res) => {
+  const { id } = req.params;
+  const { nama, mata_kuliah, nilai } = req.body;
+
+  if (nilai < 0 || nilai > 100) {
+    return res.status(400).json({ message: 'Data nilai salah, harus antara 0-100' });
+  }
+
+  let queryText = `UPDATE nilai_mahasiswa 
+                   SET nama="${nama}", mata_kuliah="${mata_kuliah}", nilai=${nilai}, indeks_nilai="${hitungIndeks(nilai)}", updated_at=now()
+                   WHERE id=${id}`;
+
+  connectionPool.query(queryText, (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: err.message });
+    }
+    res.json({ message: 'Data berhasil diperbarui' });
+  });
+};
+
+
+
+const deleteMahasiswa = (req, res) => {
+  const { id } = req.params;
+
+  let queryText = `DELETE FROM nilai_mahasiswa WHERE id=${id}`;
+
+  connectionPool.query(queryText, (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: err.message });
+    }
+    res.json({ message: 'Data berhasil dihapus' });
+  });
+};
+
+
+
+
+
+
+
+module.exports = { createMahasiswa, getAllMahasiswa, getMahasiswaById, updateMahasiswa, deleteMahasiswa };
