@@ -21,10 +21,12 @@
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "reactjs": "^1.0.0",
-    "swagger": "^0.0.1",
     "vite": "^7.1.12"
   },
   "devDependencies": {
-    "prisma": "^6.18.0"
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "prisma": "^6.18.0",
+    "tailwindcss": "^4.1.16"
   }
 }
